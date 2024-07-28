@@ -1,0 +1,523 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Neiro</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hellocat.lol">
+    <meta property="og:title" content="Hello Neiro">
+    <meta property="og:image" content="https://hellocat.lol/assets/thumb.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://hellocat.lol">
+    <meta name="twitter:title" content="Hello Neiro">
+    <meta name="twitter:image" content="https://hellocat.lol/assets/thumb.png">
+
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="preload" href="css2?family=Dongle" as="style">
+    <link href="css2?family=Dongle" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: "Dongle", sans-serif;
+            font-size: 16px;
+            z-index: 0;
+            background: #ee9047;
+            overflow: hidden;
+        }
+
+        body {
+            z-index: 1;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            background: radial-gradient(circle, #0000ff, #8000ff);
+        }
+
+        .header {
+            text-align: center;
+            margin-top: 3rem;
+            z-index: 999;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 10rem;
+            line-height: 6rem;
+            margin: 0;
+            text-shadow: 1px 10px 1px #c15f2b;
+        }
+
+        .header #copy-text {
+            cursor: pointer;
+            display: inline-block;
+            font-size: 1.6rem;
+            line-height: 100%;
+            padding: 0.6rem 2rem 0.4rem 2rem;
+            color: #ffffff;
+            background: rgb(255 255 255 / 17%);
+            border: 5px dashed #ffffff;
+            border-radius: 2rem;
+            margin-top: 1rem;
+            overflow: hidden;
+            text-shadow: 1px 2px 1px #c15f2b;
+            position: relative;
+        }
+
+        .header #copy-text::before {
+            content: "CA: ";
+        }
+
+        .header #copy-text::after {
+            content: "CA COPIED";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            color: #e7943b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            padding-top: 0.4375rem;
+            pointer-events: none;
+            transition: opacity 1s;
+            text-shadow: none;
+        }
+
+        .header #copy-text.copied::after {
+            opacity: 1;
+        }
+
+        .main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40%;
+            margin-bottom: 20px;
+            z-index: 10;
+        }
+
+        #hellocat {
+            width: 50%;
+            padding-top: 50%;
+            position: relative;
+            border-radius: 50%;
+            background: url('assets/room.png') center/cover no-repeat;
+            overflow: hidden;
+            box-shadow: 0 0 140px 14px rgb(255 243 224 / 60%);
+            border: 7px solid #fff3e0;
+            clip-path: circle(50%);
+            margin: 1rem 0;
+        }
+        
+        html:not(.play) #hellocat {
+            cursor: pointer;
+        }
+
+        #hellocat .say-hello {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            font-size: 3.5rem;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 4;
+            user-select: none;
+
+            animation: sayHello 1s ease-in-out infinite;
+        }
+
+        #hellocat .say-hello .emoji {
+            font-size: 2rem;
+            margin-left: 0.5rem;
+            display: inline-block;
+        }
+
+        html.play #hellocat .say-hello {
+            opacity: 0;
+        }
+
+        @keyframes sayHello {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        #hellocat .cat {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/cat.png') center/contain no-repeat;
+        }
+
+        html.play #hellocat .cat {
+            animation: rotateScale 6.7s linear infinite;
+        }
+
+        @keyframes rotateScale {
+            0% { transform: rotate(0deg) scale(1.2); }
+            2.78% { transform: rotate(-10deg) scale(1.0); }
+            5.56% { transform: rotate(-20deg) scale(1.2); }
+            8.34% { transform: rotate(-30deg) scale(1.0); }
+            11.12% { transform: rotate(-40deg) scale(1.2); }
+            13.90% { transform: rotate(-50deg) scale(1.0); }
+            16.68% { transform: rotate(-60deg) scale(1.2); }
+            19.46% { transform: rotate(-70deg) scale(1.0); }
+            22.24% { transform: rotate(-80deg) scale(1.2); }
+            25.02% { transform: rotate(-90deg) scale(1.0); }
+            27.80% { transform: rotate(-100deg) scale(1.2); }
+            30.58% { transform: rotate(-110deg) scale(1.0); }
+            33.36% { transform: rotate(-120deg) scale(1.2); }
+            36.14% { transform: rotate(-130deg) scale(1.0); }
+            38.92% { transform: rotate(-140deg) scale(1.2); }
+            41.70% { transform: rotate(-150deg) scale(1.0); }
+            44.48% { transform: rotate(-160deg) scale(1.2); }
+            47.26% { transform: rotate(-170deg) scale(1.0); }
+            50.04% { transform: rotate(-180deg) scale(1.2); }
+            52.82% { transform: rotate(-190deg) scale(1.0); }
+            55.60% { transform: rotate(-200deg) scale(1.2); }
+            58.38% { transform: rotate(-210deg) scale(1.0); }
+            61.16% { transform: rotate(-220deg) scale(1.2); }
+            63.94% { transform: rotate(-230deg) scale(1.0); }
+            66.72% { transform: rotate(-240deg) scale(1.2); }
+            69.50% { transform: rotate(-250deg) scale(1.0); }
+            72.28% { transform: rotate(-260deg) scale(1.2); }
+            75.06% { transform: rotate(-270deg) scale(1.0); }
+            77.84% { transform: rotate(-280deg) scale(1.2); }
+            80.62% { transform: rotate(-290deg) scale(1.0); }
+            83.40% { transform: rotate(-300deg) scale(1.2); }
+            86.18% { transform: rotate(-310deg) scale(1.0); }
+            88.96% { transform: rotate(-320deg) scale(1.2); }
+            91.74% { transform: rotate(-330deg) scale(1.0); }
+            94.52% { transform: rotate(-340deg) scale(1.2); }
+            97.30% { transform: rotate(-350deg) scale(1.0); }
+            100% { transform: rotate(-360deg) scale(1.2); }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 35px;
+            z-index: 10;
+        }
+
+        .social-link {
+            width: 4rem;
+            height: 4rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: transform 0.3s;
+            clip-path: circle(50%);
+        }
+
+        .social-link:hover {
+            transform: scale(1.1) translateZ(0);
+        }
+
+        .pages {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 20px;
+            z-index: 10;
+        }
+
+        .pages .page-link {
+            text-decoration: none;
+            font-size: 1.6rem;
+            color: #383838;
+            background: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #bg-effect {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vw;
+            background: url('assets/bg-effect.svg') center/cover no-repeat;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        html.play #bg-effect {
+            animation: rotateBg 30s linear infinite;
+        }
+
+        @keyframes rotateBg {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) rotate(90deg); }
+            50% { transform: translate(-50%, -50%) rotate(180deg); }
+            75% { transform: translate(-50%, -50%) rotate(270deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        #cloud-left, #cloud-right {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 3;
+            animation: cloudFloat 6s ease-in-out infinite;
+        }
+
+        #cloud-left {
+            width: 55rem;
+            height: 43.5rem;
+            bottom: -20rem;
+            left: -15rem;
+            background-image: url('assets/cloud_left.svg');
+            animation-duration: 8s;
+        }
+
+        #cloud-right {
+            width: 104.6rem;
+            height: 75rem;
+            bottom: -36rem;
+            right: -49rem;
+            background-image: url('assets/cloud_right.svg');
+            animation-duration: 10s;
+        }
+
+        @keyframes cloudFloat {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        .floating-word {
+            position: absolute;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            opacity: 1;
+            pointer-events: none;
+            z-index: 999;
+            animation: floatUp 1.5s ease-out forwards;
+            user-select: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 1500px) {
+            body, html {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .main {
+                width: 60%;
+            }
+            #cloud-left {
+                width: 33rem;
+                height: 26.1rem;
+                bottom: -10rem;
+                left: -6rem;
+            }
+
+            #cloud-right {
+                width: 62.76rem;
+                height: 45rem;
+                bottom: -17rem;
+                right: -27rem;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .main {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="bg-effect"></div>
+    <div id="cloud-left"></div> 
+    <div id="cloud-right"></div> 
+
+    <div class="header">
+        <h1>HELLO NEIRO</h1>
+        <span id="copy-text">soon</span>
+    </div>
+
+    <div class="main">
+        <div id="hellocat">
+            <div class="say-hello">Open Hello <span class="emoji">🥰</span></div>
+            <div class="cat"></div>
+        </div>
+    </div>
+
+    <div class="social-links">
+        <a href="https://t.me/" target="_blank" class="social-link" style="background-image: url('assets/icon-soc-tg.svg');"></a>
+        <a href="https://x.com/" target="_blank" class="social-link" style="background-image: url('assets/icon-soc-tw.svg');"></a>
+        <a href="https://dexscreener.com/solana/" target="_blank" class="social-link" style="background-image: url('assets/icon-soc-dexscreener.svg');"></a>
+        <a href="https://www.dextools.io/app/en/solana/pair-explorer/" target="_blank" class="social-link" style="background-image: url('assets/icon-soc-dextools.svg');"></a>
+    </div>
+
+    <div class="pages">
+        <a href="https://t.me/" target="_blank" class="page-link" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
+  Memes
+</a>
+        <a href="generator/index.htm" target="_blank" class="page-link" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
+  Meme Generator
+
+    <audio id="background-music" src="assets/music.mp3" loop=""></audio>
+
+    <script>
+        function startMusic() {
+            const music = document.getElementById('background-music');
+            music.play();
+        }
+    
+        document.getElementById('hellocat').addEventListener('click', function() {
+            if(!document.documentElement.classList.contains('play')) {
+                startFloatingWords(); 
+                startMusic();
+            }
+            document.documentElement.classList.add('play');
+        });
+
+        document.getElementById('copy-text').addEventListener('click', function() {
+            const text = this.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                this.classList.add('copied');
+                setTimeout(() => {
+                    this.classList.remove('copied');
+                }, 2000);
+            });
+        });
+
+        function resizeBgEffect() {
+            const bgEffect = document.getElementById('bg-effect');
+            const size = Math.sqrt(window.innerWidth ** 2 + window.innerHeight ** 2);
+            bgEffect.style.width = `${size}px`;
+            bgEffect.style.height = `${size}px`;
+        }
+
+        window.addEventListener('resize', resizeBgEffect);
+        window.addEventListener('load', resizeBgEffect);
+        
+        function showFloatingWord() {
+            if (!document.documentElement.classList.contains('play')) return;
+
+            const words = [
+            ":3",
+            "(^_^)",
+            "(≧◡≦)",
+            "(✿◠‿◠)",
+            "(｡♥‿♥｡)",
+            "(๑˃ᴗ˂)ﻭ",
+            "(*≧ω≦)",
+            "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧",
+            "(♥ω♥*)",
+            "(●´ω｀●)",
+            "(｡♥‿♥｡)",
+            "hello",
+            "hola",
+            "你好",
+            "हैलो",
+            "مرحبا",
+            "привет",
+            "こんにちは",
+            "안녕하세요",
+            "สวัสดี",
+            "xin chào",
+            "Neiro",
+            "olá",
+            "ciao",
+            "hallo",
+            "γεια",
+            "hei",
+            "neiro",
+            "sveiki",
+            "bok",
+			"DOGE 2.0",
+			"Hi Neiro",
+            "merhaba",
+            "হ্যালো",
+            "ਸਤ ਸ੍ਰੀ ਅਕਾਲ"
+            ];
+
+            const wordElement = document.createElement('div');
+            wordElement.className = 'floating-word';
+            wordElement.textContent = words[Math.floor(Math.random() * words.length)];
+
+            const randomSize = Math.random() * 3 + 2; // Размер от 2 до 5 rem
+            wordElement.style.fontSize = `${randomSize}rem`;
+
+            const randomX = Math.random() * window.innerWidth;
+            const randomY = Math.random() * window.innerHeight;
+
+            wordElement.style.left = `${randomX}px`;
+            wordElement.style.top = `${randomY}px`;
+
+            document.body.appendChild(wordElement);
+
+            wordElement.addEventListener('animationend', () => {
+                wordElement.remove();
+            });
+        }
+
+        let floatingInterval;
+        function startFloatingWords() {
+            floatingInterval = setInterval(showFloatingWord, 150);
+        }
+
+        function handleVisibilityChange() {
+            if (document.hidden) {
+                clearInterval(floatingInterval);
+            } else if (document.documentElement.classList.contains('play')) {
+                startFloatingWords();
+            }
+        }
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+    </script>
+</body>
+</html>
